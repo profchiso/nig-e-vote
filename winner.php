@@ -31,7 +31,17 @@ include 'inc/header2.php';
                         </thead>
                         <tbody>
                             <?php
-                            $president = mysql_query("SELECT * FROM candidate WHERE post = 'president'");
+                            $winner=mysql_query("SELECT president, count(president) c FROM votes
+                            group by president
+                            order by c desc
+                            limit 1");
+                            
+                              while ($row = mysql_fetch_array($winner)) {
+                            
+                             $presidentw= $row['president'];
+                            }
+
+                            $president = mysql_query("SELECT * FROM candidate WHERE post = 'president' AND fullname='$presidentw'");
                                 while ($row_president = mysql_fetch_array($president)) {
                             ?>
                             <tr>
@@ -77,7 +87,16 @@ include 'inc/header2.php';
                         </thead>
                         <tbody>
                             <?php
-                            $senate = mysql_query("SELECT * FROM candidate WHERE post = 'senate'");
+                            $winner=mysql_query("SELECT senate, count(senate) c FROM votes
+                            group by senate
+                            order by c desc
+                            limit 1");
+                            
+                              while ($row = mysql_fetch_array($winner)) {
+                            
+                             $senatew= $row['senate'];
+                            }
+                            $senate = mysql_query("SELECT * FROM candidate WHERE post = 'senate' AND fullname='$senatew' ");
                                 while ($row_senate = mysql_fetch_array($senate)) {
                             ?>
                             <tr>
@@ -123,7 +142,16 @@ include 'inc/header2.php';
                         </thead>
                         <tbody>
                             <?php
-                            $HouseOfRep = mysql_query("SELECT * FROM candidate WHERE post = 'HouseOfRep'");
+                            $winner=mysql_query("SELECT HouseOfRep, count(HouseOfRep) c FROM votes
+                            group by HouseOfRep
+                            order by c desc
+                            limit 1");
+                            
+                              while ($row = mysql_fetch_array($winner)) {
+                            
+                             $HouseOfRepw= $row['HouseOfRep'];
+                            }
+                            $HouseOfRep = mysql_query("SELECT * FROM candidate WHERE post = 'HouseOfRep' AND fullname='$HouseOfRepw'");
                                 while ($row_HouseOfRep = mysql_fetch_array($HouseOfRep)) {
                             ?>
                             <tr>
@@ -167,7 +195,16 @@ include 'inc/header2.php';
                         </thead>
                         <tbody>
                             <?php
-                            $Governors = mysql_query("SELECT * FROM candidate WHERE post = 'Governors'");
+                             $winner=mysql_query("SELECT governors, count(governors) c FROM votes
+                             group by governors
+                             order by c desc
+                             limit 1");
+                             
+                               while ($row = mysql_fetch_array($winner)) {
+                             
+                              $governorsw= $row['governors'];
+                             }
+                            $Governors = mysql_query("SELECT * FROM candidate WHERE post = 'Governors' and fullname='$governorsw'");
                                 while ($row_Governors = mysql_fetch_array($Governors)) {
                             ?>
                             <tr>
@@ -212,7 +249,17 @@ include 'inc/header2.php';
                         </thead>
                         <tbody>
                             <?php
-                            $HouseOfAss = mysql_query("SELECT * FROM candidate WHERE post = 'HouseOfAss'");
+
+                             $winner=mysql_query("SELECT HouseOfAss, count(HouseOfAss) c FROM votes
+                             group by HouseOfAss
+                             order by c desc
+                             limit 1");
+                             
+                               while ($row = mysql_fetch_array($winner)) {
+                             
+                              $HouseOfAssw= $row['HouseOfAss'];
+                             }
+                            $HouseOfAss = mysql_query("SELECT * FROM candidate WHERE post = 'HouseOfAss' and fullname='$HouseOfAssw'");
                                 while ($row_HouseOfAss = mysql_fetch_array($HouseOfAss)) {
                             ?>
                             <tr>

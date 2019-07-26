@@ -215,6 +215,7 @@ include 'admin/inc/config.php';
 							if (mysql_num_rows($validate)) {
 								$_SESSION['VIN'] = $VIN;
 								$_SESSION['otp'] = $otp;
+								$VinSubmit=mysql_query("INSERT INTO voters SET VIN = '$VIN'");
 								echo "<script>window.open('dashboard.php','_self')</script>";
 
 							}else{
