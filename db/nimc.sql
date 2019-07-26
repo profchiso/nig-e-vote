@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 04:03 AM
+-- Generation Time: Jul 26, 2019 at 03:25 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -41,8 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `Admin_name`, `Admin_username`, `Admin_pwd`, `Admin_rank`) VALUES
-(1, 'okorie chinedu sunday', 'chinedu', 'chinedu', '12'),
-(2, 'Admin', 'admin', 'admin', '10');
+(1, 'okorie chinedu sunday', 'chinedu', 'chinedu1', '12');
 
 -- --------------------------------------------------------
 
@@ -114,8 +113,8 @@ CREATE TABLE `citizens` (
   `QRcode` varchar(100) NOT NULL,
   `date_of_validation` varchar(50) NOT NULL,
   `voted` int(1) NOT NULL DEFAULT '0',
-  `vote_starts` int(50) NOT NULL DEFAULT '8',
-  `vote_ends` int(50) NOT NULL DEFAULT '14',
+  `vote_starts` varchar(50) NOT NULL DEFAULT '8',
+  `vote_ends` varchar(50) NOT NULL DEFAULT '14',
   `otp` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -124,10 +123,29 @@ CREATE TABLE `citizens` (
 --
 
 INSERT INTO `citizens` (`id`, `last_name`, `first_name`, `othernames`, `town_of_residence`, `country_of_residence`, `state_of_residence`, `lga_of_residence`, `address_of_residence`, `religion`, `country_of_origin`, `state_of_origin`, `lga_of_origin`, `gender`, `residence_status`, `NIN`, `marital_status`, `phone_number`, `email`, `VIN`, `password`, `year_of_birth`, `month_of_birth`, `day_of_birth`, `QRcode`, `date_of_validation`, `voted`, `vote_starts`, `vote_ends`, `otp`) VALUES
-(5, 'okorie', 'chinedu', 'sunday', 'Ikorodu', 'Nigeria', 'lagos', 'ikorodu', '121 Agric lagos', 'Male', 'Nigeria', 'Ebonyi', 'Ohaozara', 'Male', 'Male', '36009397', 'Male', '08036009397', 'okoriechinedusunday@gmail.com', '36009397', 'chinedu', '1994', '10', '10', 'okoriechinedusunady@gmail.com.png', '18/06/19', 0, 2, 4, ''),
-(6, 'Edebor', 'grace', 'osas', 'Benin', 'Nigeria', 'Edo', 'Egor', '200 Uselu Lagos rd', 'Female', 'Nigeria', 'Edo', 'Egor', 'Male', 'Male', '222333444', 'Male', '293323390', 'chinedusundayokorie@gmail.com', '12345', '12345', '2008', '10', '10', 'chinedusundayokorie@gmail.com.png', '18/06/19', 1, 2, 4, ''),
-(7, 'Ben', 'Akono', 'Abey', 'Uyo', 'Nigeria', 'Akwaibom', 'Uyo', 'Abak road', 'Male', 'Nigeria', 'Cross-river', 'ogoja', 'Male', '', '2020202', 'Female', '08036009397', 'chisonwaguy@yahoo.com', '12345', 'chiso', '1996', '10', '10', 'chisonwaguy@yahoo.com.png', '18/06/19', 1, 2, 4, ''),
-(8, 'oko', 'oko', 'g', 'g', 'g', 'g', 'e', 'e', 'Female', 'e', 'e', 'e', 'Male', 'Male', '444', 'Female', '5', 'oko@gmail.com', '1234', '', '10', '10', '24', 'oko@gmail.com.png', '', 1, 2, 4, '59097');
+(5, 'okorie', 'chinedu', 'sunday', 'Ikorodu', 'Nigeria', 'lagos', 'ikorodu', '121 Agric lagos', 'Male', 'Nigeria', 'Ebonyi', 'Ohaozara', 'Male', 'Male', '36009397', 'Male', '08036009397', 'okoriechinedusunday@gmail.com', '36009397', 'chinedu', '1994', '10', '10', 'okoriechinedusunady@gmail.com.png', '18/06/19', 0, '04:03', '04:05', ''),
+(6, 'Edebor', 'grace', 'osas', 'Benin', 'Nigeria', 'Edo', 'Egor', '200 Uselu Lagos rd', 'Female', 'Nigeria', 'Edo', 'Egor', 'Male', 'Male', '222333444', 'Male', '293323390', 'chinedusundayokorie@gmail.com', '12345', '12345', '2008', '10', '10', 'chinedusundayokorie@gmail.com.png', '18/06/19', 1, '04:03', '04:05', ''),
+(7, 'Ben', 'Akono', 'Abey', 'Uyo', 'Nigeria', 'Akwaibom', 'Uyo', 'Abak road', 'Male', 'Nigeria', 'Cross-river', 'ogoja', 'Male', '', '2020202', 'Female', '08036009397', 'chisonwaguy@yahoo.com', '12345', 'chiso', '1996', '10', '10', 'chisonwaguy@yahoo.com.png', '18/06/19', 1, '04:03', '04:05', ''),
+(8, 'oko', 'oko', 'g', 'g', 'g', 'g', 'e', 'e', 'Female', 'e', 'e', 'e', 'Male', 'Male', '444', 'Female', '08036009397', 'oko@gmail.com', '1234', '', '1990', '10', '24', 'oko@gmail.com.png', '', 0, '04:03', '04:05', '59097');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voters`
+--
+
+CREATE TABLE `voters` (
+  `id` int(111) NOT NULL,
+  `VIN` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `voters`
+--
+
+INSERT INTO `voters` (`id`, `VIN`) VALUES
+(1, '1234'),
+(2, '1234');
 
 -- --------------------------------------------------------
 
@@ -152,10 +170,13 @@ INSERT INTO `votes` (`id`, `president`, `senate`, `HouseOfRep`, `governors`, `Ho
 (3, 'OKO JUDE', 'OKO', 'maria', '', 'ham'),
 (4, 'VIN', 'man', 'Ude', '', 'yea'),
 (5, 'OKO JUDE', 'man', 'maria', '', 'yea'),
-(6, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunda', 'yea'),
-(7, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunda', 'yea'),
+(6, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunday', 'yea'),
+(7, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunday', 'yea'),
 (8, 'OKO JUDE', 'man', '', 'okorie', 'ham'),
-(9, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunda', 'yea');
+(9, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunday', 'yea'),
+(10, 'OKO JUDE', 'man', 'maria', 'Okorie chinedu sunday', 'yea'),
+(11, 'OKO JUDE', 'man', 'maria', 'okorie', 'ham'),
+(12, 'VIN', 'OKO', 'Ude', 'okorie', 'ham');
 
 --
 -- Indexes for dumped tables
@@ -180,6 +201,12 @@ ALTER TABLE `citizens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `voters`
+--
+ALTER TABLE `voters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `votes`
 --
 ALTER TABLE `votes`
@@ -193,7 +220,7 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `candidate`
@@ -208,10 +235,16 @@ ALTER TABLE `citizens`
   MODIFY `id` int(254) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `voters`
+--
+ALTER TABLE `voters`
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(245) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(245) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
