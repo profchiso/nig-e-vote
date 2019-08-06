@@ -54,7 +54,7 @@ include '../inc/config.php';
             <div class="container">
                 <div class="row">
 					<center><div class="col-md-12">
-						<h3 class="title">Validate you account</h3>
+						<h3 class="title">Create your account password</h3>
 	                    <br />
 	                    <a data-toggle="modal" data-target="#loginModal" class="btn btn-success btn-raised btn-lg">lets go</a>
 					</div></center>
@@ -67,7 +67,7 @@ include '../inc/config.php';
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h4 class="modal-title" align="center" id="myModalLabel">validate your VIN and create password<p><b>Note: use the email address you used in recieving this message as your email</b></p></h4>
+			        <h4 class="modal-title" align="center" id="myModalLabel"> create password<p><b>Note: use the email address you used in recieving this message as your email</b></p></h4>
 			      </div>
 			      <form method="post" action="#">
 				      <div class="modal-body">
@@ -76,13 +76,15 @@ include '../inc/config.php';
 								<label class="control-label">Email</label>
 								<input type="email" name="email" class="form-control">
 							</div>
-				        </div>
-                        <div class="form-group">
+						</div>
+
+
+                        <!-- <div class="form-group">
 				        	<div class="form-group label-floating">
 								<label class="control-label">Vin</label>
 								<input type="text" name="vin" class="form-control">
 							</div>
-				        </div>
+				        </div> -->
                         
 				        <div class="form-group">
 				        	<div class="form-group label-floating">
@@ -92,23 +94,24 @@ include '../inc/config.php';
 				        </div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-				        <button name="submit" type="submit" class="btn btn-info btn-simple">Validate</button>
+						<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+						
+				        <button name="submit" type="submit" class="btn btn-info btn-simple">Create</button>
 				      </div>
 			      </form>
 			      <?php
 			      	if (isset($_POST['submit'])) {
 			      		$email = $_POST['email'];
-						  $vin = $_POST['vin'];
+						//   $vin = $_POST['vin'];
 						  $password = $_POST['password'];
 						  $date_of_validation=date("d/m/y");
-			      		$validate = mysql_query("UPDATE citizens SET email='$email',VIN=$vin,password='$password',date_of_validation='$date_of_validation' WHERE email='$email'");
+			      		$validate = mysql_query("UPDATE citizens SET email='$email',password='$password',date_of_validation='$date_of_validation' WHERE email='$email'");
 			      		if ($validate) {
 							 
-						   echo "<script>alert('validation successful, visit localhost/nigeria-e-voting to cast your vote');</script>";
+						   echo "<script>alert('password created login to validate your acc');</script>";
 			      			echo "<script>window.open('../index.php','_self')</script>";
 			      		}else{
-			      			echo "<script>alert('Validation Unsuccessful check if you enterd the correct emial')</script>";
+			      			echo "<script>alert('password creation Unsuccessful check if you enterd the correct emial')</script>";
 			      		
 			      		}
 			      	}

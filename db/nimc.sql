@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2019 at 03:25 AM
+-- Generation Time: Aug 06, 2019 at 03:51 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -136,16 +136,22 @@ INSERT INTO `citizens` (`id`, `last_name`, `first_name`, `othernames`, `town_of_
 
 CREATE TABLE `voters` (
   `id` int(111) NOT NULL,
-  `VIN` varchar(255) NOT NULL
+  `VIN` varchar(255) NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `voters`
 --
 
-INSERT INTO `voters` (`id`, `VIN`) VALUES
-(1, '1234'),
-(2, '1234');
+INSERT INTO `voters` (`id`, `VIN`, `fullname`, `phone`, `email`) VALUES
+(1, '1234', '', '', ''),
+(2, '1234', '', '', ''),
+(3, '', 'Ben Akono ', '08036009397 ', 'chisonwaguy@yahoo.com '),
+(4, '', 'Ben Akono ', '08036009397 ', 'chisonwaguy@yahoo.com '),
+(5, '1234', 'Ben Akono ', '08036009397 ', 'chisonwaguy@yahoo.com ');
 
 -- --------------------------------------------------------
 
@@ -238,7 +244,7 @@ ALTER TABLE `citizens`
 -- AUTO_INCREMENT for table `voters`
 --
 ALTER TABLE `voters`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `votes`

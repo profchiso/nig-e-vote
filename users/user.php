@@ -10,6 +10,7 @@ $fetch = mysql_query("SELECT * FROM citizens WHERE email='$email'");
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<h4 class="page-header text-center">Scan your QRcode to see your OTP for voting</h4>
 			<h5 class="page-header text-center"><b><a href="logout.php"><?php echo $email.'    '.'';?> proceed to vote</a></b></h4>
+			
 		</div>
 		<!-- Page Header -->
 	</div>
@@ -57,7 +58,10 @@ $fetch = mysql_query("SELECT * FROM citizens WHERE email='$email'");
 							
 								<td><img src="../admin/phpqrcode/temp/<?php echo $row['QRcode']?>" class="img-responsive" width="100" height="100"></td>
 								
-								<td></td>
+								<td><a href="users_preview.php?id=<?php echo $row['id']?>" class="btn btn-sm btn-info">Validate</a></td>
+							</tr>
+							<tr>
+							<td><a download href="../admin/phpqrcode/temp/<?php echo $row['QRcode']?>">Download QRcode</a></td>
 							</tr>
 
 							<div class="modal fade" id="edit<?php echo $row['id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
