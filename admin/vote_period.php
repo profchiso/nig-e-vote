@@ -15,7 +15,7 @@ include 'inc/sidebar.php';
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3>Set Voting time</h3>
+					<h3>Set Voting time and voting state</h3>
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#candidateReg"><i class="fa fa-plus"></i>Set Time</a>
 				</div>
 				<div class="panel-body table-responsive">
@@ -53,12 +53,16 @@ include 'inc/sidebar.php';
          <form method="post" action="#" enctype="multipart/form-data">
 		      <div class="modal-body">
 		         <div class="form-group">
-				 <label for="start_time">Start Time</label>
-		         	<input type="time" name="start_time" class="form-control" required>
+				 					<label for="start_time">Start Time</label>
+		         			<input type="time" name="start_time" class="form-control" required>
 		         </div>
-				 <div class="form-group">
-				 <label for="end_time" >End Time</label>
-		         	<input type="time" name="end_time" class="form-control"  required >
+				 		<div class="form-group">
+				 					<label for="end_time" >End Time</label>
+		         			<input type="time" name="end_time" class="form-control"  required >
+		         </div>
+						 <div class="form-group">
+				 					<label for="end_time" >Voting State</label>
+		         			<input type="text" name="voting_state" class="form-control"  required >
 		         </div>
 			
 		      </div>
@@ -74,7 +78,9 @@ include 'inc/sidebar.php';
 if(isset($_POST["register"]) && isset($_POST['start_time']) && isset($_POST['end_time'])) {
 	$start_time = $_POST['start_time'];
 	$end_time= $_POST['end_time'];
-		        $sql = mysql_query("UPDATE citizens SET vote_starts='$start_time', vote_ends='$end_time'");
+	$voting_state =$_POST['voting_state'];
+						$sql = mysql_query("UPDATE citizens SET vote_starts='$start_time', vote_ends='$end_time',voting_state='$voting_state'");
+						
 			        if ($sql) {
 			        	echo "<script>alert('Voting Time Set!')</script>";
 			        	echo "<script>window.open('vote_period.php','_self')</script>";

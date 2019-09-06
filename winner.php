@@ -11,6 +11,10 @@ include 'inc/header2.php';
             </div>
         </div>
     </div>
+    <?php 
+    $checkForEmpty =mysql_query("SELECT * FROM votes");
+    if(mysql_num_rows($checkForEmpty)>0){
+    ?>
     <div class="mbr-section mbr-section-nopadding">
         <div class="container">
         <div class="row">   
@@ -285,6 +289,7 @@ include 'inc/header2.php';
                 </div>
             </div>
         </div>
+                                <?php } ?>
 
     </div>
     </div>

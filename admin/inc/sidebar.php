@@ -36,13 +36,14 @@
                         <a href="votes.php"><i class="fa fa-user"></i> Votes <span class="fa arrow"></span></a>
                     </li>
                     <li>
-                    
                         <a href="sms.php"><i class="fa fa-user"></i> SMS Eligible Voters <span class="fa arrow"></span></a>
                     </li>
 
                     <li>
-                    
                         <a href="vote_period.php"><i class="fa fa-user"></i> Set Voting Period <span class="fa arrow"></span></a>
+                    </li>
+                    <li>
+                        <a href="delete_voting_section.php"><i class="fa fa-user"></i>Clear Voting Session <span class="fa arrow"></span></a>
                     </li>
 
 

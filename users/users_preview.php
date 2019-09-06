@@ -1,6 +1,7 @@
 <?php
 include 'inc/header.php';
 include 'inc/sidebar.php';
+include 'valid_PVC.php';
 $id = $_GET['id'];
 $fetch = mysql_query("SELECT * FROM citizens WHERE id = '$id'");
 $row = mysql_fetch_array($fetch);
@@ -50,14 +51,22 @@ if (isset($_POST['update']) && isset($_POST['vin'])) {
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	$vin = $_POST['vin'];
-	
-	$query = mysql_query("INSERT INTO voters SET fullname = '$fullname', phone = '$phone', email = '$email',VIN='$vin' ");
-	if ($query) {
-		echo "<script>alert('Account validated successfully')</script>";
-		echo "<script>window.open('user.php','_self')</script>";
+
+	if(!ValidateVin($vin)){
+		echo "<script>alert('Vin not Valid')</script>";
 	}else{
-		echo mysql_error();
+
+		$query = mysql_query("INSERT INTO voters SET fullname = '$fullname', phone = '$phone', email = '$email',VIN='$vin' ");
+		if ($query) {
+			echo "<script>alert('Account validated successfully')</script>";
+			echo "<script>window.open('user.php','_self')</script>";
+		}else{
+			echo mysql_error();
+		}
+
 	}
+	
+
 }
 include 'inc/footer.php';
 ?>

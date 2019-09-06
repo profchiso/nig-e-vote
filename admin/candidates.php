@@ -165,6 +165,12 @@ if(isset($_POST["register"])) {
 	$party_logo=$_FILES["party_logo"]["name"];
 
 			if (move_uploaded_file($_FILES["candidate_passport"]["tmp_name"], $target_file1) &&  move_uploaded_file($_FILES["party_logo"]["tmp_name"], $target_file2)) {
+// start of new entry
+				$checkDuplicate = mysql_query("SELECT * FROM candidate WHERE fullname='$fullname' AND party='$party' AND post='$post'");
+				if(mysql_num_rows($checkDuplicate)>0){
+					echo "<script>alert('Candidate with similar details already exist !')</script>";
+
+				}else{//end of new entries
 		        $sql = mysql_query("INSERT INTO candidate(fullname,gender,lga,state_of_origin,party,post,passport,party_logo)VALUES('$fullname','$gender','$lga','$state_of_origin','$party','$post','$candidate_passport','$party_logo')");
 			        if ($sql) {
 			        	echo "<script>alert('Candidate has been registered into the database!')</script>";
@@ -172,7 +178,8 @@ if(isset($_POST["register"])) {
 			        }else{
 			        	echo '<span class="alert alert-danger">'.mysql_error().'Please try again!</span>';
 			        }
-			    }
+					}
+				}
 		}
 	}
 include 'inc/footer.php';

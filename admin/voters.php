@@ -136,6 +136,7 @@ require_once 'smsapi.php';
 			</div>
 		</div>
 	</div>
+	
 	<div class="modal fade" id="candidateReg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
