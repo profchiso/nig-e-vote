@@ -350,7 +350,7 @@ include '../admin/inc/config.php';
 $currentYear = date('Y');
 
 	include 'phpqrcode/index.php';
-	if($currentYear - $year_of_birth < 18){
+	if(($currentYear - $year_of_birth) < 18){
 
 		        $sql = mysql_query("INSERT INTO  citizens(last_name,first_name,othernames,town_of_residence,country_of_residence,state_of_residence,lga_of_residence,address_of_residence,religion,country_of_origin,state_of_origin,lga_of_origin,gender,residence_status,NIN,marital_status,phone_number,email,year_of_birth,month_of_birth,day_of_birth,QRcode,otp )VALUES('$last_name','$first_name','$othernames','$town_of_residence','$country_of_residence','$state_of_residence','$lga_of_residence','$address_of_residence','$religion','$country_of_origin','$state_of_origin','$lga_of_origin','$gender','$residence_status','$NIN','$marital_status','$phone_number','$email','$year_of_birth','$month_of_birth','$day_of_birth','$name.png','$random')");
 			        if ($sql) {

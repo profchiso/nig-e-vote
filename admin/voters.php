@@ -3,7 +3,7 @@ include 'inc/header.php';
 include 'inc/sidebar.php';
 require_once 'invite_voters.php';
 
-$fetch = mysql_query("SELECT * FROM citizens");
+$fetch = mysql_query("SELECT * FROM voters");
 require_once 'smsapi.php';
 ?>
 <div id="page-wrapper">
