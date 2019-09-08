@@ -213,55 +213,61 @@ include 'admin/inc/config.php';
 						  	//decision proper
 
 						  if($current_time_hour_main >= $db_main_start_hour && $current_time_minute_main >= $db_main_start_minute  && $current_time_hour_main <= $db_main_end_hour && $current_time_minute_main <= $db_main_end_minute){
+
+								
+
 							$VIN = $_POST['VIN'];
 							$otp = $_POST['otp'];
 
-							$validate = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted = '0' AND  state_of_origin=voting_state");
+							// $validate = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted = '0' AND  state_of_origin=voting_state");
+
+
+
+							$validVinAndOTO =false;
+							$isVotingState =false;
+							$hasVoted = false;
 //recent logic
-									$vinOtpCheck = mysql_query("SELECT VIN,otp FROM citizens WHERE VIN=$vin AND otp=$otp");
-									if(mysql_num_rows($vinOtpCheck)){
-										$isValidVIN = $VIN;
-										$isValidOtp = $otp;
-											$checkVoted= mysql_query("SELECT * FROM citizens Where VIN='$isValidVIN' AND otp ='$isValidOtp' AND voted = '0'");
-											if(mysql_num_rows($checkVoted)){
+									$vinOtpCheck = mysql_query("SELECT VIN,otp FROM citizens WHERE VIN='$vin' AND otp='$otp'");
+									if(mysql_num_rows($vinOtpCheck)==1){
+										$validVinAndOTO=true;
 
-												$isEligibleToVote = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted = '0' AND  state_of_origin=voting_state");
+										$isEligibleToVote = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp'  AND  state_of_origin=voting_state");
+										if(mysql_num_rows($isEligibleToVote)==1){
+											$isvotingState=true;
+											$hasNotVoted =mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted=0 AND  state_of_origin=voting_state");
 
-												if(mysql_num_rows($isEligibleToVote)){
-													$_SESSION['VIN'] = $VIN;
-								          $_SESSION['otp'] = $otp;
-								// $VinSubmit=mysql_query("INSERT INTO voters SET VIN = '$VIN'");
-								          echo "<script>window.open('dashboard.php','_self')</script>";
+									if(mysql_num_rows($hasNotVoted)==1){
+										$hasVoted=true;
 
-												}else{
-													echo "<script>alert('Sorry is not your State turn to vote yet check later')</script>";
-												}
-
-
-											
-											}else{
-												echo "<script>alert('duplicate  voting not allowed')</script>";
-
-											}
+										if ($validVinAndOTO && $isVotingState && $hasVoted ) {
+											$_SESSION['VIN'] = $VIN;
+											$_SESSION['otp'] = $otp;
+										
+											echo "<script>window.open('dashboard.php','_self')</script>";
+			
+										}
 
 
 									}else{
-										echo "<script>alert('Incorrect Login Details ')</script>";
+										echo "<script>alert('Vin already Voted')</script>";
 									}
-						
 
+										}else{
+											echo "<script>alert('Sorry is not the turn of you state to vote')</script>";
+										}
+
+
+									}else{
+										echo "<script>alert('Incorrect VIN and OTP')</script>";
+
+									}
+
+								
+									
 //end of recent logic
 
 
-							if (mysql_num_rows($validate)) {
-								$_SESSION['VIN'] = $VIN;
-								$_SESSION['otp'] = $otp;
-								// $VinSubmit=mysql_query("INSERT INTO voters SET VIN = '$VIN'");
-								echo "<script>window.open('dashboard.php','_self')</script>";
-
-							}else{
-								echo "<script>alert('Incorrect Login Details OR you have Voted before!')</script>";
-							}
+						
 
 						  }else{
 							echo "<script>alert('Please voting starts by  $start   and ends by $end  in 24hrs time count')</script>";

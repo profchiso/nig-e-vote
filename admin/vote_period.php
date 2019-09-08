@@ -75,14 +75,14 @@ include 'inc/sidebar.php';
   </div>
   </div>
 <?php
-if(isset($_POST["register"]) && isset($_POST['start_time']) && isset($_POST['end_time'])) {
+if(isset($_POST["register"]) && isset($_POST['start_time']) && isset($_POST['end_time']) && isset($_POST['voting_state'])) {
 	$start_time = $_POST['start_time'];
 	$end_time= $_POST['end_time'];
 	$voting_state =$_POST['voting_state'];
 						$sql = mysql_query("UPDATE citizens SET vote_starts='$start_time', vote_ends='$end_time',voting_state='$voting_state'");
 						
 			        if ($sql) {
-			        	echo "<script>alert('Voting Time Set!')</script>";
+			        	echo "<script>alert('Voting Time and state Set!')</script>";
 			        	echo "<script>window.open('vote_period.php','_self')</script>";
 			        }else{
 			        	echo '<span class="alert alert-danger">'.mysql_error().'Please try again!</span>';

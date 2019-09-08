@@ -24,12 +24,12 @@ include 'inc/sidebar.php';
 		
 		<div class="col-md-6">
 			<div class="alert alert-danger">
-				<i class="fa fa-envelope fa-3x"></i> 0 <b>Messages</b>
+				<i class="fa fa-envelope fa-3x"></i>  <b>Messages</b>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="alert alert-success">
-				<i class="fa fa-tag fa-3x"></i> 0 <b>notifications</b>
+				<i class="fa fa-tag fa-3x"></i> <b>notifications</b>
 			</div>
 		</div>
 	</div>

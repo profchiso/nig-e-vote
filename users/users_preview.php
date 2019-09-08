@@ -56,12 +56,21 @@ if (isset($_POST['update']) && isset($_POST['vin'])) {
 		echo "<script>alert('Vin not Valid')</script>";
 	}else{
 
-		$query = mysql_query("INSERT INTO voters SET fullname = '$fullname', phone = '$phone', email = '$email',VIN='$vin' ");
-		if ($query) {
-			echo "<script>alert('Account validated successfully')</script>";
-			echo "<script>window.open('user.php','_self')</script>";
+		$isInPVC = mysql_query("SELECT VIN FROM pvc WHERE VIN ='$vin'");
+		if(mysql_num_rows($isInPVC)==1){
+
+			$query = mysql_query("UPDATE voters SET VIN='$vin' Where email='$email' ");
+			$query2 =mysql_query("UPDATE  citizens SET VIN='$vin'  WHERE email='$email'");
+			if ($query && $query2) {
+				echo "<script>alert('Account validated successfully')</script>";
+				echo "<script>window.open('user.php','_self')</script>";
+			}else{
+				echo mysql_error();
+			}
+
 		}else{
-			echo mysql_error();
+			echo "<script>alert('Vin entered is not registerd')</script>";
+
 		}
 
 	}

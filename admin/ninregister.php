@@ -238,7 +238,7 @@ include '../admin/inc/config.php';
 		         	<input type="text" name="first_name" required class="form-control" placeholder="First Name">
 		         </div>
 						 <div class="form-group">
-		         	<input type="text" name="othernames" required class="form-control" placeholder="Othernames">
+		         	<input type="text" name="othernames"  class="form-control" placeholder="Othernames">
 		         </div>
 						 <div class="form-group">
 		         	<input type="text" name="town_of_residence" required class="form-control" placeholder="Town Of Residence">
@@ -349,7 +349,7 @@ include '../admin/inc/config.php';
 
 $currentYear = date('Y');
 
-	include 'admin/phpqrcode/index.php';
+	include 'phpqrcode/index.php';
 	if($currentYear - $year_of_birth < 18){
 
 		        $sql = mysql_query("INSERT INTO  citizens(last_name,first_name,othernames,town_of_residence,country_of_residence,state_of_residence,lga_of_residence,address_of_residence,religion,country_of_origin,state_of_origin,lga_of_origin,gender,residence_status,NIN,marital_status,phone_number,email,year_of_birth,month_of_birth,day_of_birth,QRcode,otp )VALUES('$last_name','$first_name','$othernames','$town_of_residence','$country_of_residence','$state_of_residence','$lga_of_residence','$address_of_residence','$religion','$country_of_origin','$state_of_origin','$lga_of_origin','$gender','$residence_status','$NIN','$marital_status','$phone_number','$email','$year_of_birth','$month_of_birth','$day_of_birth','$name.png','$random')");
@@ -371,7 +371,7 @@ $sql = mysql_query("INSERT INTO  voters(last_name,first_name,othernames,town_of_
 
 //if all insertion went well
 			        if ($sql) {
-			        	echo "<script>alert('Citizen has been registered into the database!')</script>";
+			        	echo "<script>alert('REGISTRATION SUCCESSFUL!')</script>";
 			        	echo "<script>window.open('index.php','_self')</script>";
 			        }else{
 			        	echo '<span class="alert alert-danger">'.mysql_error().'Please try again!</span>';

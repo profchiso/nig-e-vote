@@ -157,7 +157,7 @@ require_once 'smsapi.php';
 		         	<input type="text" name="first_name" required class="form-control" placeholder="First Name">
 		         </div>
 						 <div class="form-group">
-		         	<input type="text" name="othernames" required class="form-control" placeholder="Othernames">
+		         	<input type="text" name="othernames"  class="form-control" placeholder="Othernames">
 		         </div>
 						 <div class="form-group">
 		         	<input type="text" name="town_of_residence" required class="form-control" placeholder="Town Of Residence">
