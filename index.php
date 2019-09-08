@@ -134,144 +134,146 @@ include 'admin/inc/config.php';
 			      <?php
 			      	if (isset($_POST['submit'])) {
 
-						  $start_vote= date('H');
-						  $end_vote=date('H');
+								$start_vote= date('H');
+								$end_vote=date('H');
+	
+								$vote_period = mysql_query("SELECT * FROM citizens ");
+								$row = mysql_fetch_array($vote_period);
+								$start=$row['vote_starts'];
+								$end=$row['vote_ends'];
+	
+								//working on database start time
+	
+								//toAarry
+								$db_start_time_arr = explode(':',$start);
+	
+								//split to Char
+								$db_start_hour = str_split($db_start_time_arr[0]);
+								$db_start_minute = str_split($db_start_time_arr[1]);
+	
+								//picking the usefull values
+								if($db_start_hour[0]>0){
+									$db_main_start_hour = $db_start_time_arr[0];
+								}else{
+								 $db_main_start_hour = $db_start_hour[1];
+								}
+	
+								if($db_start_minute[0]>0){
+									$db_main_start_minute = $db_start_time_arr[1];
+								}else{
+								$db_main_start_minute = $db_start_minute[1]; 
+								}
+	
+								//end of working on start time;
+	
+	
+								//working on database end time
+	
+								//toAarry
+								$db_end_time_arr = explode(':',$end);
+	
+								//split to Char
+								$db_end_hour = str_split($db_end_time_arr[0]);
+								$db_end_minute = str_split($db_end_time_arr[1]);
+	
+								//picking the usefull values
+								if($db_end_hour[0]>0){
+									$db_main_end_hour = $db_end_time_arr[0];
+								}else{
+								 $db_main_end_hour = $db_end_hour[1];
+								}
+	
+								if($db_end_minute[0]>0){
+									$db_main_end_minute = $db_end_time_arr[1];
+								}else{
+								$db_main_end_minute = $db_end_minute[1]; 
+								}
+	
+								//end of working on end time;
+	
+								//working on current time hour
+								$current_time_hour= str_split(date('H'));
+	
+								if($current_time_hour[0]>0){
+									$current_time_hour_main= date('H');
+								}else{
+								$current_time_hour_main=  $current_time_hour[1]-1;
+								}
+	
+								 //working on current time minutes
+								 $current_time_minute= str_split(date('i'));
+	
+								if($current_time_minute[0]>0){
+									$current_time_minute_main= date('i');
+								}else{
+								$current_time_minute_main =  $current_time_minute[1];
+								}
+	
+	
+									//decision proper
 
-						  $vote_period = mysql_query("SELECT * FROM citizens ");
-						  $row = mysql_fetch_array($vote_period);
-						  $start=$row['vote_starts'];
-						  $end=$row['vote_ends'];
-
-						  //working on database start time
-
-						  //toAarry
-						  $db_start_time_arr = explode(':',$start);
-
-						  //split to Char
-						  $db_start_hour = str_split($db_start_time_arr[0]);
-						  $db_start_minute = str_split($db_start_time_arr[1]);
-
-							//picking the usefull values
-						  if($db_start_hour[0]>0){
-							  $db_main_start_hour = $db_start_time_arr[0];
-						  }else{
-							 $db_main_start_hour = $db_start_hour[1];
-						  }
-
-						  if($db_start_minute[0]>0){
-							  $db_main_start_minute = $db_start_time_arr[1];
-						  }else{
-							$db_main_start_minute = $db_start_minute[1]; 
-						  }
-
-						  //end of working on start time;
-
-
-						  //working on database end time
-
-						  //toAarry
-						  $db_end_time_arr = explode(':',$end);
-
-						  //split to Char
-						  $db_end_hour = str_split($db_end_time_arr[0]);
-						  $db_end_minute = str_split($db_end_time_arr[1]);
-
-							//picking the usefull values
-						  if($db_end_hour[0]>0){
-							  $db_main_end_hour = $db_end_time_arr[0];
-						  }else{
-							 $db_main_end_hour = $db_end_hour[1];
-						  }
-
-						  if($db_end_minute[0]>0){
-							  $db_main_end_minute = $db_end_time_arr[1];
-						  }else{
-							$db_main_end_minute = $db_end_minute[1]; 
-						  }
-
-						  //end of working on end time;
-
-						  //working on current time hour
-						  $current_time_hour= str_split(date('H'));
-
-						  if($current_time_hour[0]>0){
-							  $current_time_hour_main= date('H');
-						  }else{
-							$current_time_hour_main=  $current_time_hour[1]-1;
-						  }
-
-						   //working on current time minutes
-						   $current_time_minute= str_split(date('i'));
-
-						  if($current_time_minute[0]>0){
-							  $current_time_minute_main= date('i');
-						  }else{
-							$current_time_minute_main =  $current_time_minute[1];
-						  }
-
-
-						  	//decision proper
-
-						  if($current_time_hour_main >= $db_main_start_hour && $current_time_minute_main >= $db_main_start_minute  && $current_time_hour_main <= $db_main_end_hour && $current_time_minute_main <= $db_main_end_minute){
-
-								
-
-							$VIN = $_POST['VIN'];
-							$otp = $_POST['otp'];
-
-							// $validate = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted = '0' AND  state_of_origin=voting_state");
-
-
-
-							$validVinAndOTO =false;
-							$isVotingState =false;
-							$hasVoted = false;
-//recent logic
-									$vinOtpCheck = mysql_query("SELECT VIN,otp FROM citizens WHERE VIN='$vin' AND otp='$otp'");
-									if(mysql_num_rows($vinOtpCheck)==1){
-										$validVinAndOTO=true;
-
-										$isEligibleToVote = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp'  AND  state_of_origin=voting_state");
-										if(mysql_num_rows($isEligibleToVote)==1){
-											$isvotingState=true;
-											$hasNotVoted =mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted=0 AND  state_of_origin=voting_state");
-
-									if(mysql_num_rows($hasNotVoted)==1){
-										$hasVoted=true;
-
-										if ($validVinAndOTO && $isVotingState && $hasVoted ) {
-											$_SESSION['VIN'] = $VIN;
-											$_SESSION['otp'] = $otp;
-										
-											echo "<script>window.open('dashboard.php','_self')</script>";
-			
-										}
-
-
-									}else{
-										echo "<script>alert('Vin already Voted')</script>";
-									}
-
-										}else{
-											echo "<script>alert('Sorry is not the turn of you state to vote')</script>";
-										}
-
-
-									}else{
-										echo "<script>alert('Incorrect VIN and OTP')</script>";
-
-									}
-
-								
 									
+								// if($current_time_hour_main >= $db_main_start_hour && $current_time_minute_main >= $db_main_start_minute  && $current_time_hour_main <= $db_main_end_hour && $current_time_minute_main <= $db_main_end_minute){
+
+
+
+								
+
+
+	$VIN = $_POST['VIN'];
+	$otp = $_POST['otp'];
+
+
+//recent logic
+			$vinOtpCheck = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp='$otp'");
+			if(mysql_num_rows($vinOtpCheck)){
+				
+
+				$isEligibleToVote = mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp'  AND  state_of_origin=voting_state");
+				if(mysql_num_rows($isEligibleToVote)){
+					
+					$hasNotVoted =mysql_query("SELECT * FROM citizens WHERE VIN='$VIN' AND otp ='$otp' AND voted=0 AND  state_of_origin=voting_state");
+
+			if(mysql_num_rows($hasNotVoted)){
+				
+
+				//if ($validVinAndOTO && $isVotingState && $hasVoted ) {
+					$_SESSION['VIN'] = $VIN;
+					$_SESSION['otp'] = $otp;
+				
+					echo "<script>window.open('dashboard.php','_self')</script>";
+
+				//}
+
+
+			}else{
+				echo "<script>alert('Vin already Voted')</script>";
+			}
+
+				}else{
+					echo "<script>alert('Sorry is not the turn of you state to vote')</script>";
+				}
+
+
+			}else{
+				echo "<script>alert('Incorrect VIN and OTP')</script>";
+				echo "<script>window.open('index.php','_self')</script>";
+
+			}
+
+		
+			
 //end of recent logic
 
 
-						
 
-						  }else{
-							echo "<script>alert('Please voting starts by  $start   and ends by $end  in 24hrs time count')</script>";
-						  }
+
+
+								// }else{
+								// echo "<script>alert('Please voting starts by  $start   and ends by $end  in 24hrs time count')</script>";
+								// }
+
+								
 			      	}
 			      ?>
 			    </div>
