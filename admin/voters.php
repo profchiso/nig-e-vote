@@ -2,9 +2,10 @@
 include 'inc/header.php';
 include 'inc/sidebar.php';
 require_once 'invite_voters.php';
+require_once 'smsapi.php';
 
 $fetch = mysql_query("SELECT * FROM voters");
-require_once 'smsapi.php';
+
 ?>
 <div id="page-wrapper">
 	<div class="row">
@@ -18,10 +19,51 @@ require_once 'smsapi.php';
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3>Registered Voters</h3>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#candidateReg"><i class="fa fa-plus"></i> ADD NEW VOTER</a>
-					<form method="POST"><button class="btn btn-info btn-sm"  name="email_invite"><i class="fa fa-plus"></i> Email Eligible Voters</button></form>
+				<h3>
+					<?php
+					$registered = mysql_query("SELECT COUNT(*)  from citizens ");
+
+				while($row=mysql_fetch_array($registered)){
+					?>
+				<h3 style="color:black">Total Number Of Registered Voters &nbsp; &nbsp;&nbsp;&nbsp; <b><?php	echo $row['COUNT(*)']; ?> </b></h3>
+				
+			<?php	}?>
+					</h3>
 					
+					<h3>
+					<?php
+					$validated = mysql_query("SELECT COUNT(*)  from citizens WHERE VIN != ''");
+
+				while($row=mysql_fetch_array($validated)){
+					?>
+				<h3 style="color:black">Total Validated Voters &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><?php	echo $row['COUNT(*)']; ?> </b></h3>
+				
+			<?php	}?>
+					</h3>
+
+
+					<h3>
+					<?php
+					$Voted = mysql_query("SELECT COUNT(*)  from votes ");
+
+				while($row=mysql_fetch_array($Voted)){
+					?>
+				<h3 style="color:black">Total Number Of People Voted &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><?php	echo $row['COUNT(*)']; ?> </b></h3>
+				
+			<?php	}?>
+					</h3>
+
+
+
+
+					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#candidateReg"><i class="fa fa-plus"></i> ADD NEW VOTER</a>
+					<form method="POST">
+					<button class="btn btn-info btn-sm"  name="email_invite"><i class="fa fa-plus"></i> Email Eligible Voters</button>
+					
+					<!-- </form>
+					<form method="POST">
+					<button class="btn btn-info btn-sm"  name="sms_invite"><i class="fa fa-plus"></i> SMS Eligible Voters</button>
+					</form> -->
 				</div>
 				<div class="table-responsive">
 					<table class="table">
@@ -78,13 +120,13 @@ require_once 'smsapi.php';
 									      		<input type="text" name="id" class="form-control" value="<?php echo $row['id']?>" readonly>
 									      	</div>
 									         <div class="form-group">
-									         	<input type="text" name="last_name" readonly class="form-control" value="<?php echo $row['last_name']?>" placeholder="Candidate's Fullname">
+									         	<input type="text" name="last_name" readonly class="form-control" value="<?php echo $row['last_name']?>" placeholder="last name">
 											 </div>
 											 <div class="form-group">
-									         	<input type="text" readonly name="first_name" class="form-control" value="<?php echo $row['first_name']?>" placeholder="Staff Number">
+									         	<input type="text" readonly name="first_name" class="form-control" value="<?php echo $row['first_name']?>" placeholder="first name">
 											 </div>
 											 <div class="form-group">
-									         	<input type="text" readonly name="first_name" class="form-control" value="<?php echo $row['gender']?>" placeholder="Staff Number">
+									         	<input type="text" readonly name="first_name" class="form-control" value="<?php echo $row['gender']?>" placeholder="gender">
 									         </div>
 									        
 		
@@ -103,7 +145,7 @@ require_once 'smsapi.php';
 							         		$first_name = $_POST['first_name'];
 							         		$phone_number = $_POST['phone_number'];
 							         		$id = $_POST['id'];
-							         		$update_row = mysql_query("UPDATE citizens SET last_name = '$last_name', first_name = '$first_name', phone_number = '$phone_number' WHERE id = '$id' ");
+							         		$update_row = mysql_query("UPDATE voters SET last_name = '$last_name', first_name = '$first_name', phone_number = '$phone_number' WHERE id = '$id' ");
 							         		if ($update_row) {
 							         			echo "<script>alert('Citizen data Updated Succesfully')</script>";
 							         			echo "<script>window.open('voters.php','_self')</script>";

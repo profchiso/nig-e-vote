@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['sms'])){ 
+if(isset($_POST['sms_invite'])){ 
 
 $conn = mysql_connect('localhost','root','');
 $db = mysql_select_db("nimc");

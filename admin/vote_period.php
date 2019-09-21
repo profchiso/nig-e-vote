@@ -1,7 +1,7 @@
 <?php
 include 'inc/header.php';
 include 'inc/sidebar.php';
-//$fetch = mysql_query("SELECT * FROM admin");
+$fetch = mysql_query("SELECT * FROM citizens LIMIT 1");
 ?>
 <div id="page-wrapper">
 	<div class="row">
@@ -19,26 +19,25 @@ include 'inc/sidebar.php';
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#candidateReg"><i class="fa fa-plus"></i>Set Time</a>
 				</div>
 				<div class="panel-body table-responsive">
-					<!--<table class="table table-striped">
+					<table class="table table-striped">
 						<thead>
-							<th>Admin Name</th>
-							<th>Username</th>
-							<th>Admin Rank</th>
-							<th>Admin Password</th>
+							<th>Voting Starts</th>
+							<th>Voting Ends</th>
+							<th>Voting State</th>
 						</thead>
 						<tbody>
 							<?php
-								//while ($row = mysql_fetch_array($fetch)) {
+							while ($row = mysql_fetch_array($fetch)) {
 							?>
 							<tr>
-								<td><?php// echo $row['Admin_name']?></td>
-								<td><?php //echo $row['Admin_username']?></td>
-								<td><?php //echo $row['Admin_rank']?></td>
-								<td><?php //echo $row['Admin_pwd']?></td>
+								<td><?php echo $row['vote_starts']?></td>
+								<td><?php echo $row['vote_ends']?></td>
+								<td><?php echo $row['voting_state']?></td>
+							
 							</tr>
-							<?php// } ?>
+							<?php } ?>
 						</tbody>
-					</table>-->
+					</table>
 				</div>
 			</div>
 		</div>

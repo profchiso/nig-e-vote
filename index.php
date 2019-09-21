@@ -110,6 +110,19 @@ include 'admin/inc/config.php';
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			        <h4 class="modal-title" align="center" id="myModalLabel">Login with the details sent to you</h4>
+							<p>
+							<?php
+							$fetch = mysql_query("SELECT * FROM citizens LIMIT 1");
+							while ($row = mysql_fetch_array($fetch)) {
+							?>
+							
+									<p>Voting starts: &nbsp; &nbsp;<b><?php echo $row['vote_starts']?></b></p>
+									<p>Voting ends: &nbsp;&nbsp;<b><?php echo $row['vote_ends']?></b></p>
+									<p>Voting State:&nbsp;&nbsp;<b><?php echo $row['voting_state']?></b></p>
+								
+								
+								<?php } ?>
+							</p>
 			      </div>
 			      <form method="post" action="#">
 				      <div class="modal-body">
