@@ -1,9 +1,6 @@
 <?php
 include 'inc/header.php';
 include 'inc/sidebar.php';
-require_once 'invite_voters.php';
-require_once 'smsapi.php';
-
 $fetch = mysql_query("SELECT * FROM voters");
 
 ?>
@@ -57,13 +54,11 @@ $fetch = mysql_query("SELECT * FROM voters");
 
 
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#candidateReg"><i class="fa fa-plus"></i> ADD NEW VOTER</a>
-					<form method="POST">
+					<!-- <form method="POST">
 					<button class="btn btn-info btn-sm"  name="email_invite"><i class="fa fa-plus"></i> Email Eligible Voters</button>
 					
-					<!-- </form>
-					<form method="POST">
-					<button class="btn btn-info btn-sm"  name="sms_invite"><i class="fa fa-plus"></i> SMS Eligible Voters</button>
-					</form> -->
+					 </form> -->
+					
 				</div>
 				<div class="table-responsive">
 					<table class="table">

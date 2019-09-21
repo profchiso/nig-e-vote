@@ -1,6 +1,7 @@
 <?php
 include 'inc/header.php';
 include 'inc/sidebar.php';
+require_once 'invite_voters.php';
 
 //require_once 'smsapi.php';
 $fetch = mysql_query("SELECT * FROM citizens");
@@ -11,7 +12,7 @@ $fetch = mysql_query("SELECT * FROM citizens");
 	<div class="row">
 		<!-- Page Header -->
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<h1 class="page-header">SMS invitation Portal</h1>
+			<h1 class="page-header"> invitation Portal</h1>
 		</div>
 		<!-- Page Header -->
 	</div>
@@ -20,7 +21,13 @@ $fetch = mysql_query("SELECT * FROM citizens");
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="alert alert-success text-center" >INVITE VOTERS</h3>
-					<form method="POST" action="smsapi.php"><button class="btn btn-success btn-sm" type="submit" name="sms"><i class="fa fa-plus"></i> SMS Eligible Voters</button></form>
+					<form method="POST" action="smsapi.php"><button class="btn btn-success btn-sm" type="submit" name="sms"><i class="fa fa-plus"></i>By SMS </button></form>
+
+
+					<form method="POST">
+					<button class="btn btn-info btn-sm"  name="email_invite"><i class="fa fa-plus"></i>By Email </button>
+					
+					 </form>
 					
 				</div>
 				<div class="table-responsive">

@@ -36,7 +36,7 @@
                         <a href="votes.php"><i class="fa fa-user"></i> Votes <span class="fa arrow"></span></a>
                     </li>
                     <li>
-                        <a href="sms.php"><i class="fa fa-user"></i> SMS Eligible Voters <span class="fa arrow"></span></a>
+                        <a href="sms.php"><i class="fa fa-user"></i> Invite Eligible Voters <span class="fa arrow"></span></a>
                     </li>
 
                     <li>
